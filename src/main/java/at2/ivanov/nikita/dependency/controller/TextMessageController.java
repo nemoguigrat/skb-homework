@@ -1,7 +1,6 @@
 package at2.ivanov.nikita.dependency.controller;
 
 import at2.ivanov.nikita.dependency.service.MessageService;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,7 @@ public class TextMessageController {
         return textMessageService.getMessage();
     }
 
-    @PostMapping("/text/")
+    @PostMapping("/text")
     public void setMessage(@RequestParam String string) {
         textMessageService.setMessage(string.getBytes());
     }
