@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table border="1">
+        <tr>
+            <th>Header</th>
+            <th>Value</th>
+        </tr>
+        <tr th:each ="header : ${headers.entrySet()}">
+            <td th:utext="${header.getKey()}">...</td>
+            <td th:utext="${header.getValue()}">...</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
