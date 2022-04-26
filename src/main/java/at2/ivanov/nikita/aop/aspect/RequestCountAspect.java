@@ -37,6 +37,5 @@ public class RequestCountAspect {
             throw new MaxMethodCallsException("Method " + point.getSignature().getName() +
                     " calls " + oldValue + " times");
         memberValues.put("initialCount", oldValue + 1);
-        log.error(String.valueOf(requestCount.initialCount()));
     }
 }

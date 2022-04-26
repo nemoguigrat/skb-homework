@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MainController {
+    // добавил 2 эндпоинта, счетчики для каждого незавимимые
     @RequestCount
     @GetMapping("/aspect/first")
     public String aspectFirst() {
