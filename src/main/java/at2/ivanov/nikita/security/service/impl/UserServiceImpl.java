@@ -5,9 +5,11 @@ import at2.ivanov.nikita.security.dto.UserDto;
 import at2.ivanov.nikita.security.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,9 +29,11 @@ public class UserServiceImpl implements UserService {
     private final InMemoryUserDetailsManager userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private static final String ROLE_PREFIX = "ROLE_";
+    private final SessionRegistry sessionRegistry;
 
     @Override
     public UserDto getUser(Principal principal) {
+        log.error(String.valueOf(sessionRegistry.getAllPrincipals().size()));
         return new UserDto(userDetailsService.loadUserByUsername(principal.getName()));
     }
 

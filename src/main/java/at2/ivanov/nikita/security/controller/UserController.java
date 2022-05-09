@@ -3,6 +3,8 @@ package at2.ivanov.nikita.security.controller;
 import at2.ivanov.nikita.security.dto.RegisterDto;
 import at2.ivanov.nikita.security.dto.UserDto;
 import at2.ivanov.nikita.security.service.UserService;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,6 @@ import java.security.Principal;
 
 @RestController
 @AllArgsConstructor
-@Slf4j
 public class UserController {
     private final UserService userService;
 
@@ -22,6 +23,8 @@ public class UserController {
         userService.registerUser(data);
     }
 
+    @Timed
+    @Counted(value = "counted.success.user")
     @GetMapping("/api/secured/user")
     public UserDto getUser(Principal principal) {
         return userService.getUser(principal);
@@ -32,6 +35,7 @@ public class UserController {
         userService.addUserRole(username, role);
     }
 
+    @Timed
     @GetMapping("/api/support/support-info")
     public String getSupportInfo() {
         return "Some support info";
